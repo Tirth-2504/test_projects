@@ -1,9 +1,8 @@
 const { name } = require('ejs');
 const mongoose = require('mongoose');
 
-//Creating user model
-
-const userSchema = new mongoose.Schema({
+//Creating user modelu
+const UserSchema = new mongoose.Schema({
     name: {type: String, required: true},
     email: {type: String, required: true, unique: true},
     password: {type: String, required: true},
@@ -11,12 +10,12 @@ const userSchema = new mongoose.Schema({
 
 });
 
-const User = new mongoose.model('User', SchemaUser);
+const User = new mongoose.model('User', UserSchema);
 
 //Controller function
-const SchemaUser = async (firstName, email, password, age) => {
+const createUser = async (firstName, email, password, age) => {
     try {
-        const user = new userSchema({firstName, email, password, age});
+        const user = new User({firstName, email, password, age});
         user.save();
         return user;
     } catch (error) {
